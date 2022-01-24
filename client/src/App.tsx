@@ -1,29 +1,28 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect, useState } from 'react';
+import Login from './components/login/login';
+import Homepage from './components/homepage/homepage.js';
 
 function App() {
-  const [data, setData] = React.useState(null);
-
-  React.useEffect(() => {
-    fetch('http://localhost:3001/api', {
-      headers: {
-        'Content-Type': 'application/json',
-        Accept: 'application/json',
-      },
-    })
-      .then((res) => res.json())
-      .then((data) => setData(data.message));
+  const [isUserSignedIn, setIsUserSignedIn] = useState(false);
+  useEffect(() => {
+    if (localStorage.getItem('token')) setIsUserSignedIn(true);
+    else setIsUserSignedIn(false);
   }, []);
-  console.log({ data });
+
+  const onLoginSuccessful = () => {
+    setIsUserSignedIn(true);
+  };
+
+  const onLogout = () => {
+    localStorage.removeItem('name');
+    localStorage.removeItem('token');
+    setIsUserSignedIn(false);
+  };
 
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>{!data ? 'Loading...' : data}</p>
-      </header>
-    </div>
+    (isUserSignedIn && <Homepage onLogout={onLogout} />) || (
+      <Login onLoginSuccessful={onLoginSuccessful} />
+    )
   );
 }
 
