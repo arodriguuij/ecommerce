@@ -1,18 +1,19 @@
-import React from 'react';
+import React, { createContext } from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
 import App from './App';
-import reportWebVitals from './reportWebVitals';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import CssBaseline from '@mui/material/CssBaseline';
+import './index.css';
 
-ReactDOM.render(
+import ToggleColorMode from './components/toggleColorMode/ToggleColorMode';
+export const ColorModeContext = createContext({ toggleColorMode: () => {} });
+
+const MyApp = () => (
   <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
+    <CssBaseline />
+    <ToggleColorMode>
+      <App />
+    </ToggleColorMode>
+  </React.StrictMode>
 );
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+ReactDOM.render(<MyApp />, document.getElementById('root'));

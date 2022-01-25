@@ -17,7 +17,7 @@ export async function login({ email, password }) {
     });
 }
 
-export async function searchArtworks({ keyword }) {
+/* export async function searchArtworks({ keyword }) {
   return await fetch(`/api/homepage/getArtworks/${keyword}`, {
     method: 'GET',
     headers: { 'Content-Type': 'application/json' },
@@ -34,3 +34,4 @@ export async function searchArtworks({ keyword }) {
       console.log(err);
     });
 }
+ */

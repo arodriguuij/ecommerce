@@ -31,10 +31,6 @@ middlewares();
 const routes = () => {
   app.use(paths.auth, require('./routes/auth'));
   app.use(paths.homepage, require('./routes/homepage'));
-  // Handle GET requests to /api route
-  app.get('/test', (req, res) => {
-    res.json({ message: 'Hello from server!' });
-  });
   // All other GET requests not handled before will return our React app
   app.get('*', (req, res) => {
     res.sendFile(path.resolve(__dirname, '../client/build', 'index.html'));
